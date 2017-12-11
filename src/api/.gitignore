@@ -20,3 +20,5 @@
 # Ignore build time files
 build/**
 version.txt
+
+api_node/filesystem/bin/**
