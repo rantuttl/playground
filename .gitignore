@@ -1,0 +1,22 @@
+# Mac stuff
+.DS_Store
+
+# Compiled python modules.
+*.pyc
+
+# Git cache
+.git
+
+# Setup tools distribution folder.
+**/dist/
+**/build/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+
+# Ignore Idea IDE's metadata
+.idea
+
+# Ignore build time files
+build/**
+version.txt

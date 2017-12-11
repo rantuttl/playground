@@ -1,0 +1,7 @@
+tornado
+setuptools
+passlib>=1.7.1
+pyjwt
+cffi>=0.8.2
+pyopenssl
+urllib3
