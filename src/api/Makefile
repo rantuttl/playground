@@ -47,6 +47,7 @@ build-binary:
 
 # Build API binary straight into a container image
 build-api-node-container: $(API_NODE_DIR)/Dockerfile
+        -mkdir -p $(API_NODE_BIN_DIR)
 	cp ../dist/$(BIN_IMAGE_DIR)/* $(API_NODE_BIN_DIR)
 
 	docker build -t $(API_NODE_CONTAINER) $(API_NODE_DIR)
