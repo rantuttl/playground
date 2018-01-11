@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # Copyright 2017-2018 rantuttl All rights reserved.
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ import os
 import os.path
 import setuptools
 import inspect
+
 
 def collect_requirements():
 
@@ -32,7 +33,7 @@ def collect_requirements():
     # setup.py regardless of how you execute it. It's tempting to use __file__
     # but that only works if setup.py is executed directly, otherwise it all
     # goes terribly wrong.
-    directory =  os.path.dirname(
+    directory = os.path.dirname(
         os.path.abspath(inspect.getfile(inspect.currentframe()))
     )
 
@@ -58,7 +59,6 @@ def collect_requirements():
                     reqs.add(line)
 
     return reqs
-
 
 
 # 'name' should match the package name (directory) when 'pip install .'

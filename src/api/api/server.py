@@ -24,7 +24,9 @@ from tornado.web import Application
 from api.v1 import configure, initialize
 from api.v1.auth import RootHandler, PasswordHandler, SignupHandler
 
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s %(message)s')
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
+                    format='%(asctime)s %(message)s')
+
 
 def setup_server():
     tornado_logger = logging.getLogger('tornado.curl_httpclient')
@@ -32,7 +34,7 @@ def setup_server():
     tornado_logger.propagate = False
 
     settings = dict(
-        secret='everybodys got $omething 2 hide except 4 me and my monkey'
+        secret='abcde12345'
     )
     configure(settings)
     IOLoop.current().add_future(initialize(settings), start_server)
@@ -51,10 +53,11 @@ def start_server(future):
     server = HTTPServer(application)
     server.listen(8888)
 
+
 def main():
     setup_server()
     IOLoop.current().start()
-    
+
 
 if __name__ == '__main__':
     main()

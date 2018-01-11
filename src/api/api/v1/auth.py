@@ -34,17 +34,24 @@ user_cache = dict()
 
 
 def _generate_hashed_password(password):
-    salt = "".join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(64))
-    hash = sha512_crypt.encrypt((password + salt).encode("utf-8"), rounds=ROUNDS)
+    salt = "".join(random.SystemRandom().choice(string.ascii_uppercase
+                   + string.digits) for _ in range(64))
+    hash = sha512_crypt.encrypt((password + salt).encode("utf-8"),
+                                rounds=ROUNDS)
     hash_parts = hash.split("$rounds={0}$".format(ROUNDS))
-    return {"hash": hash_parts[1], "rounds": "{0}$rounds={1}$".format(hash_parts[0], ROUNDS), "salt": salt}
+    return {"hash": hash_parts[1],
+            "rounds": "{0}$rounds={1}$".format(hash_parts[0], ROUNDS),
+            "salt": salt}
 
-def _fill_signup_invitation_request(document, firstname, lastname, password=None):
+
+def _fill_signup_invitation_request(document, firstname, lastname,
+                                    password=None):
     document["firstname"] = firstname
     document["lastname"] = lastname
     document["email_validated_at"] = datetime.utcnow()
     if password is not None:
         document["password"] = _generate_hashed_password(password)
+
 
 class RootHandler(RequestHandler):
 
@@ -57,6 +64,7 @@ class RootHandler(RequestHandler):
         else:
             self.write(users)
             self.flush()
+
 
 class AuthHandler(RequestHandler):
 
@@ -115,8 +123,11 @@ class PasswordHandler(AuthHandler):
             logging.info("User '%s' has not password.", username)
             raise HTTPError(401, reason="Invalid username or password.")
 
-        encoded_user_password = '{0}{1}'.format(user["password"]["rounds"], user["password"]["hash"])
-        if sha512_crypt.verify((password + user["password"]["salt"]).encode("utf-8"), encoded_user_password):
+        encoded_user_password = '{0}{1}'.format(user["password"]["rounds"],
+                                                user["password"]["hash"])
+        if sha512_crypt.verify((password
+                               + user["password"]["salt"]).encode("utf-8"),
+                               encoded_user_password):
             token = yield self.authenticate_user(user)
             self.write(token)
             self.flush()
