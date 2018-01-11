@@ -20,6 +20,7 @@ from tornado.gen import coroutine, Return
 TOKEN_HEADER = "Auth-Token"
 VALIDATION_TOKEN_HEADER = "Signup-Validation-Token"
 
+
 def configure(settings):
     logging.info("Configuring server.")
     pass
